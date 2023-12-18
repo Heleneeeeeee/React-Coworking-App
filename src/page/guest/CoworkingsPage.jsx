@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import Header from "../component/Header";
+import Header from "../../component/guest/Header";
+import { Link } from "react-router-dom";
 
 const CoworkingsPage = () => {
-    const [coworkings, setcoworkings] = useState()
+    const [coworkings, setcoworkings] = useState(null);
+
+    const apiHost = "http://localhost:3000/api"
 
     useEffect(()=>{
         (async()=>{
-            const coworkingsResponse = await fetch ('http://localhost:3000/api/coworkings')
-            const coworkingsData = await coworkingsResponse.json()
-            setcoworkings(coworkingsData)
+            const coworkingsResponse = await fetch (apiHost+'/coworkings')
+            const coworkingsResponseData = await coworkingsResponse.json()
+
+            setcoworkings(coworkingsResponseData);
     })()
     },[])
 
@@ -24,6 +28,7 @@ const CoworkingsPage = () => {
                     <article>
                         <>
                         <h2>{coworking.name}</h2>
+                        <Link to={`/coworking/details/${coworking.id}`}>Voir le coworking</Link>
                         </>    
                     </article>
                 );
