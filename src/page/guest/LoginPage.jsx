@@ -1,6 +1,6 @@
 const LoginPage = () => {
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault()
 
     const username = event.target.username.value;
@@ -8,14 +8,32 @@ const LoginPage = () => {
 
     console.log(username, password)
 
-    // je créé objet en json avec username et password
-    // je fais un fetch de type POST sur mon API login, en incluant le json
-    // si l'api valide => jwt dans la réponse
-    // sinon => erreur dans la réponse
+  
 
-    
+// Je déclare une variable afin de créer un objet contenant username et password
+  const loginData = {
+    username,
+    password,
   };
 
+// Je décalre une autre variable afin de convertir mon objet en JSON
+  const loginDataJson= JSON.stringify(loginData)
+
+// Je fais un fetch POST sur mon API login de mon objet JSON
+  const loginResponse = await fetch ("http://localhost:3000/api/users/login",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: loginDataJson,
+  });
+// Je récupère la réponse JSON et je la transforme pour qu'elle soit lue en JS. Si le username est correct, il renvoie le token dans la réponse.
+//Sinon il affiche un message d'erreur.
+  const loginResponseData = await loginResponse.json();
+  const token = loginResponseData.data;
+
+  console.log(token);
+};
 
     return(
         <section>
