@@ -32,7 +32,11 @@ const LoginPage = () => {
   const loginResponseData = await loginResponse.json();
   const token = loginResponseData.data;
 
-  console.log(token);
+// si le token existe
+  if(token) {
+// je le stocke fans le local storage
+    localStorage.setItem("jwt", token);
+  }
 };
 
     return(
