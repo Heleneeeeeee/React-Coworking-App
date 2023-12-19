@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 const LoginPage = () => {
+    const [message,setmessage] = useState (null)
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -36,11 +39,16 @@ const LoginPage = () => {
   if(token) {
 // je le stocke fans le local storage
     localStorage.setItem("jwt", token);
+    setmessage("Vous êtes bien connecté")
+  }else{ 
+    setmessage("Erreur lors de la connexion")
+
   }
 };
 
     return(
         <section>
+            {message && <p>{message}</p> }
             <form onSubmit={handleLogin}>
                 <label>
                     username
