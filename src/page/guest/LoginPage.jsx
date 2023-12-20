@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const [message,setmessage] = useState (null)
+
+    const navigate = useNavigate();
 
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -40,6 +43,7 @@ const LoginPage = () => {
 // je le stocke fans le local storage
     localStorage.setItem("jwt", token);
     setmessage("Vous êtes bien connecté")
+    navigate("/admin/");
   }else{ 
     setmessage("Erreur lors de la connexion")
 
@@ -47,6 +51,7 @@ const LoginPage = () => {
 };
 
     return(
+        <>
         <section>
             {message && <p>{message}</p> }
             <form onSubmit={handleLogin}>
@@ -61,6 +66,7 @@ const LoginPage = () => {
                 <input type="submit"/>
             </form>
         </section>
+        </>
 
     );
 }

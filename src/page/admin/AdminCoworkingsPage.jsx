@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import HeaderAdmin from "../../component/admin/HeaderAdmin";
 
 const AdminCoworkingsPage = () => {
   const [coworkings, setCoworkings] = useState(null);
@@ -27,6 +28,7 @@ const AdminCoworkingsPage = () => {
   console.log(onclick)
   return (
     <>
+    <HeaderAdmin />
       <h1>Liste des coworkings : </h1>
 
       {coworkings ? (

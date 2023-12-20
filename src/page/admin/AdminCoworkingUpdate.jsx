@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import HeaderAdmin from "../../component/admin/HeaderAdmin";
 
 const AdminCoworkingUpdate = () =>{
 // J'utilise la fonction useParams afin d'associer l'id de l'url à l'id du coworking
@@ -85,6 +86,7 @@ const AdminCoworkingUpdate = () =>{
 
     return (
         <div>
+          <HeaderAdmin />
           <>{message && <p>{message}</p>}</>
           {coworking && (
             <form onSubmit={handleUpdateCoworking}>

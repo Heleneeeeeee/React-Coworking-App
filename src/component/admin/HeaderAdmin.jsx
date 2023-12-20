@@ -1,8 +1,31 @@
+import { Link, useNavigate } from "react-router-dom";
+
 const HeaderAdmin = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("jwt")
+
+        navigate("/login")
+
+    }
     return (
-        <div>
-            <h1>Bienvenue sur la page Admin</h1>
-        </div>
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/admin">Dashboard</Link>
+                    </li>
+                    <li>
+                    <Link to="/admin/coworkings">Gérer les Coworkings</Link>
+                    </li>
+                    <li>
+                    <Link to="/admin/coworkings/create">Créer un Coworking</Link>
+                    </li>
+                </ul>
+                <button onClick={handleLogout}>Se déconnecter</button>
+            </nav>
+        </header>
     )
 }
 
