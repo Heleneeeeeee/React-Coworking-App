@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import HeaderAdmin from "../../component/admin/HeaderAdmin";
+import { jwtDecode } from "jwt-decode";
 
 const AdminCoworkingsPage = () => {
   const [coworkings, setCoworkings] = useState(null);
+  // Je récupère le tken dans le local storage
+  const token = localStorage.getItem("jwt");
+  // Je décode le token pour récupérer le RoleId
+  const decodedToken = jwtDecode(token);
+
 
   useEffect(() => {
     (async () => {
@@ -13,7 +19,7 @@ const AdminCoworkingsPage = () => {
   }, []);
 
   const handleDeleteCoworking = async (event, coworkingId) => {
-    const token = localStorage.getItem("jwt");
+  
 
     await fetch("http://localhost:3000/api/coworkings/" + coworkingId, {
       method: "DELETE",
@@ -25,7 +31,8 @@ const AdminCoworkingsPage = () => {
     setCoworkings(coworkingsResponseData);
   };
 
-  console.log(onclick)
+ 
+
   return (
     <>
     <HeaderAdmin />
@@ -37,7 +44,10 @@ const AdminCoworkingsPage = () => {
             return (
               <article>
                 <h2>{coworking.name}</h2>
+                {/* Si le Role dans le TokenData est différent de 3, Je peux supprimer les Coworkings  */}
+                {decodedToken.data.role !== 3 && (
                 <button onClick={(event) => handleDeleteCoworking(event, coworking.id)}>Supprimer</button>
+                )}
               </article>
             );
           })}
