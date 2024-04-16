@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HeaderAdmin from "../../component/admin/HeaderAdmin";
+import { UseVerifyIfUserIsLogged } from "../../utils/security-utils";
 
 const AdminCoworkingUpdate = () =>{
+  UseVerifyIfUserIsLogged();
+  
 // J'utilise la fonction useParams afin d'associer l'id de l'url à l'id du coworking
-    const { id } =useParams()
+    const { id } = useParams()
 // J'utilise la fonction useState je lui passe en paramètre la variable coworking dont la valeur par defaut est nulle.
     const [coworking, setCoworking] = useState (null)
 
